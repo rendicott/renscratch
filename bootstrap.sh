@@ -1,8 +1,8 @@
 #!/bin/bash
 target=$1
 set -x
-apk upgrade --update
-apk add bash ca-certificates
+apt-get update
+apt-get install haproxy ca-certificates -y
 touch haproxy.cfg
 cat << EOF > haproxy.cfg
 global
@@ -37,4 +37,3 @@ backend site_ssl
 server site-redirect-ssl $target:443
 EOF
 haproxy -f haproxy.cfg
-[root@ip-10-232-227-86 hap]#
